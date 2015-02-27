@@ -12,7 +12,7 @@ ADD mysqlsetup /root/tools/mysqlsetup
 RUN chmod +x /root/tools/mysqlsetup && /root/tools/mysqlsetup
 ADD my.cnf /etc/my.cnf
 ADD mysqlstart /root/tools/mysqlstart
-RUN chmod +x /root/tools/mysqlstart && ls -lah /var/lib/mysql && tail -80 /var/log/mysqld.log && yum -y install perl-DBD-MySQL && yum clean all && rm -rf /var/cache/* && echo "" > /var/log/yum.log && echo "" > /var/log/mysqld.log && echo "" > /var/log/yum.log && echo "" > /var/log/secure && echo "" > /var/log/messages
+RUN chmod +x /root/tools/mysqlstart && ls -lah /var/lib/mysql && tail -80 /var/log/mysqld.log && rm -rf /var/cache/* && echo "" > /var/log/yum.log && echo "" > /var/log/mysqld.log && echo "" > /var/log/yum.log && echo "" > /var/log/secure && echo "" > /var/log/messages
 
 # Expose 3306 to outside
 EXPOSE 3306
