@@ -3,7 +3,7 @@ MAINTAINER George Liu <https://github.com/centminmod/docker-centos66-webscalesql
 # Setup WebScaleSQL 5.6 on CentOS 6.6
 # http://webscalesql.org/
 # http://repo.psce.com/download/webscalesql/rpm/x86_64/centos-6/
-RUN yum -y install epel-release lynx nano which inotify-tools perl-DBI python-setuptools libaio && rm -rf /var/cache/*; echo "" > /var/log/yum.log && easy_install pip && pip install supervisor && pip install supervisor-stdout
+RUN yum -y install epel-release lynx wget nano which inotify-tools perl-DBI python-setuptools libaio && rm -rf /var/cache/*; echo "" > /var/log/yum.log && easy_install pip && pip install supervisor && pip install supervisor-stdout
 ADD supervisord.conf /etc/supervisord.conf
 ADD supervisord_init /etc/rc.d/init.d/supervisord
 RUN chmod +x /etc/rc.d/init.d/supervisord && mkdir -p /etc/supervisord.d/ && touch /var/log/supervisord.log && chmod 0666 /var/log/supervisord.log
