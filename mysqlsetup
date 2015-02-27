@@ -37,6 +37,7 @@ mysql -e "DROP USER ''@'`hostname`';" 2>/dev/null
 mysql -e "DROP DATABASE test;"
 mysql -e "DELETE FROM mysql.user WHERE user = '';"
 mysql -e "GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY 'mysql' WITH GRANT OPTION;"
+mysql -e "GRANT ALL ON *.* TO 'root'@'172.17.%.%' IDENTIFIED BY 'mysql' WITH GRANT OPTION;"
 mysql -e "GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%' IDENTIFIED BY 'repl';"
 mysql -e "FLUSH PRIVILEGES;"
 
