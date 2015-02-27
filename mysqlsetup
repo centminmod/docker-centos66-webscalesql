@@ -17,6 +17,8 @@ DFTPASS=$(awk '/password/{print $NF}' /root/.mysql_secret)
 
 mysqladmin -u root --password=${DFTPASS} password mysqlpass
 
+/etc/init.d/mysql restart
+
 /usr/bin/mysql -u root --password=${DFTPASS} -t -e "SELECT * FROM mysql.plugin;"
 /usr/bin/mysql -u root --password=${DFTPASS} -t -e "SHOW PLUGINS;"
 /usr/bin/mysql -u root --password=${DFTPASS} -t -e "SHOW ENGINES;"
