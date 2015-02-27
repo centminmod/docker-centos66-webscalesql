@@ -50,4 +50,4 @@ echo "MySQL root user added to /root/.my.cnf"
 echo "-------------------------------------------------------"
 #echo "MySQL root password: $THEMYSQLPASS"
 #echo "-------------------------------------------------------"
-# /etc/init.d/mysql stop
+/etc/init.d/mysql stop
