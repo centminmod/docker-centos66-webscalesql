@@ -17,28 +17,28 @@ DFTPASS=$(awk '/password/{print $NF}' /root/.mysql_secret)
 
 mysqladmin -u root --password=${DFTPASS} password mysqlpass
 
-/etc/init.d/mysql restart
-
-/usr/bin/mysql -u root --password=${DFTPASS} -t -e "SELECT * FROM mysql.plugin;"
-/usr/bin/mysql -u root --password=${DFTPASS} -t -e "SHOW PLUGINS;"
-/usr/bin/mysql -u root --password=${DFTPASS} -t -e "SHOW ENGINES;"
-
-# secure mysql server
-#THEMYSQLPASS=$(openssl rand 12 -base64)
-THEMYSQLPASS=mysqlpass
-mysql -u root --password=${DFTPASS} -e "DROP USER ''@'localhost';"
-mysql -u root --password=${DFTPASS} -e "DROP USER ''@'`hostname`';" 2>/dev/null
-mysql -u root --password=${DFTPASS} -e "DROP DATABASE test;"
-mysql -u root --password=${DFTPASS} -e "DELETE FROM mysql.user WHERE user = '';"
-mysql -u root --password=${DFTPASS} -e "GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY 'mysql' WITH GRANT OPTION;"
-mysql -u root --password=${DFTPASS} -e "GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%' IDENTIFIED BY 'repl';"
-mysql -u root --password=${DFTPASS} -e "UPDATE mysql.user SET Password = PASSWORD('$THEMYSQLPASS') WHERE User = 'root'; FLUSH PRIVILEGES;"
-
 cat > "/root/.my.cnf" <<EOF
 [client]
 user=root
 password=mysqlpass
 EOF
+
+/etc/init.d/mysql restart
+
+/usr/bin/mysql -t -e "SELECT * FROM mysql.plugin;"
+/usr/bin/mysql -t -e "SHOW PLUGINS;"
+/usr/bin/mysql -t -e "SHOW ENGINES;"
+
+# secure mysql server
+#THEMYSQLPASS=$(openssl rand 12 -base64)
+THEMYSQLPASS=mysqlpass
+mysql -e "DROP USER ''@'localhost';"
+mysql -e "DROP USER ''@'`hostname`';" 2>/dev/null
+mysql -e "DROP DATABASE test;"
+mysql -e "DELETE FROM mysql.user WHERE user = '';"
+mysql -e "GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY 'mysql' WITH GRANT OPTION;"
+mysql -e "GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%' IDENTIFIED BY 'repl';"
+mysql -e "FLUSH PRIVILEGES;"
 
 echo ""
 echo "-------------------------------------------------------"
