@@ -40,21 +40,18 @@ to connect from host system to MariaDB docker container use the -h IP address wh
 
 e.g. host system running CentminMod.com LEMP stack MariaDB 10 server hence the client is 10.0.16 to connect to WebScaleSQL 5.6.23 docker container
 
-    mysqladmin -P 3307 -h 172.17.42.1 -u root -p ver
-    mysqladmin  Ver 8.42 Distrib 5.6.23, for Linux on x86_64
-    Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
-    
-    Oracle is a registered trademark of Oracle Corporation and/or its
-    affiliates. Other names may be trademarks of their respective
-    owners.
+    mysqladmin -P 3307 -h 172.17.42.1 -u root -p ver                   
+    Enter password: 
+    mysqladmin  Ver 9.1 Distrib 10.0.16-MariaDB, for Linux on x86_64
+    Copyright (c) 2000, 2014, Oracle, MariaDB Corporation Ab and others.
     
     Server version          5.6.23
     Protocol version        10
-    Connection              Localhost via UNIX socket
-    UNIX socket             /var/lib/mysql/mysql.sock
-    Uptime:                 20 sec
+    Connection              172.17.42.1 via TCP/IP
+    TCP port                3307
+    Uptime:                 5 sec
     
-    Threads: 1  Questions: 2  Slow queries: 0  Opens: 15  Flush tables: 1  Open tables: 8  Queries per second avg: 0.100
+    Threads: 1  Questions: 2  Slow queries: 0  Opens: 15  Flush tables: 1  Open tables: 8  Queries per second avg: 0.400
 
 ---
 
