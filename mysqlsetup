@@ -1,28 +1,28 @@
 #/bin/bash
 
-#WSBASE=$(lynx -dump -listonly http://repo.psce.com/download/webscalesql/rpm/x86_64/centos-6/ | awk -F '. ' '/5.6./ {print $3}' | tail -1)
-#WSLATESTURL=$(lynx -dump -listonly $WSBASE  | awk -F '. ' '/5.6./ {print $3}' | tail -1)
-#WSRPMFILES=$(lynx -dump -listonly $WSLATESTURL  | awk -F '. ' '/\/webscalesql-/ {print $3}')
+WSBASE=$(lynx -dump -listonly https://repo.psce.com/download/webscalesql/rpm/x86_64/centos-6/ | awk -F '. ' '/5.6./ {print $3}' | tail -1)
+WSLATESTURL=$(lynx -dump -listonly $WSBASE  | awk -F '. ' '/5.6./ {print $3}' | tail -1)
+WSRPMFILES=$(lynx -dump -listonly $WSLATESTURL  | awk -F '. ' '/\/webscalesql-/ {print $3}')
 
 # install WebScaleSQL RPMs
-#cd /tmp
-#for r in $WSRPMFILES; do RPM=$(echo ${r##*/}); if [[ "$(echo $RPM | egrep -v 'embedded|test')" ]]; then echo "$RPM"; wget -cnv $r; rpm -ivh $r; fi; done
+cd /tmp
+for r in $WSRPMFILES; do RPM=$(echo ${r##*/}); if [[ "$(echo $RPM | egrep -v 'embedded|test')" ]]; then echo "$RPM"; wget -cnv $r; rpm -ivh $r; fi; done
 
 # clean up
-#rm -rf /tmp/*.rpm
+rm -rf /tmp/*.rpm
 
-rpm --import http://repo.psce.com/psce/RPM-GPG-KEY-PSCE
+# rpm --import http://repo.psce.com/psce/RPM-GPG-KEY-PSCE
 
-cat > "/etc/yum.repos.d/psce.repo" <<EOF
-[repo.psce.com_webscalesql]
-name=PSCE Repository
-baseurl=http://repo.psce.com/psce/yum/$releasever/$basearch
-gpgkey=http://repo.psce.com/psce/RPM-GPG-KEY-PSCE
-gpgcheck=1
-enabled=1
-EOF
+# cat > "/etc/yum.repos.d/psce.repo" <<EOF
+# [repo.psce.com_webscalesql]
+# name=PSCE Repository
+# baseurl=http://repo.psce.com/psce/yum/$releasever/$basearch
+# gpgkey=http://repo.psce.com/psce/RPM-GPG-KEY-PSCE
+# gpgcheck=1
+# enabled=1
+# EOF
 
-yum -y install webscalesql-client webscalesql-devel webscalesql-server webscalesql-shared
+# yum -y install webscalesql-client webscalesql-devel webscalesql-server webscalesql-shared
 
 /etc/init.d/mysql start
 
